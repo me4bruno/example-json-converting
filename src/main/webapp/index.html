@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Meine Orte</title>
+
+<script type="text/javascript" src="http://dev.openlayers.org/releases/OpenLayers-2.11/OpenLayers.js"></script>
+
+<script type="text/javascript">
+  PROJECTION_4326 = new OpenLayers.Projection("EPSG:4326");
+  PROJECTION_MERC = new OpenLayers.Projection("EPSG:900913");
+
+  function init() {
+      map = new OpenLayers.Map("map", {
+      controls : [ new OpenLayers.Control.PanZoomBar(),
+        new OpenLayers.Control.Navigation(),
+        new OpenLayers.Control.LayerSwitcher(),
+        new OpenLayers.Control.MousePosition(),
+        new OpenLayers.Control.Attribution(),
+        new OpenLayers.Control.OverviewMap() ],
+      maxExtent : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
+      numZoomLevels : 18,
+      maxResolution : 156543,
+      units : 'm',
+      projection : PROJECTION_MERC,
+      displayProjection : PROJECTION_4326
+    });
+
+    // Layer: OSM 
+    var osmLayer = new OpenLayers.Layer.OSM("OpenStreetMap");
+    map.addLayer(osmLayer);
+    
+    var center = new OpenLayers.LonLat(8.59, 52.9);
+    var centerAsMerc = center.transform(PROJECTION_4326, PROJECTION_MERC);
+    map.setCenter(centerAsMerc, 14);
+
+    // Layer: POIs
+    var poiStyle = {externalGraphic: '${image}', graphicHeight: 37, graphicWidth: 32, graphicYOffset: -34};
+    var poisLayer = new OpenLayers.Layer.Vector("POIs", {
+        projection: PROJECTION_4326,
+        protocol: new OpenLayers.Protocol.HTTP({
+                url: "pois",
+                format: new OpenLayers.Format.GeoJSON()
+        }),
+        strategies: [new OpenLayers.Strategy.BBOX()],
+		styleMap: new OpenLayers.StyleMap(poiStyle)
+    })
+    map.addLayer(poisLayer);
+  }
+	  
+</script>
+
+<style type="text/css">
+html,body,#map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+</style>
+
+</head>
+<body onload="init()">
+  <div id="map"></div>
+</body>
+</html>
