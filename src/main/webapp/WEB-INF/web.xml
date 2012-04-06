@@ -10,7 +10,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>PoiServlet</servlet-name>
-		<url-pattern>pois</url-pattern>
+		<url-pattern>/pois</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
