@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import de.bruns.example.json.converting.service.JsonSimpleService;
 import de.bruns.example.json.converting.service.OrgJsonService;
 import de.bruns.example.json.converting.service.StringJsonService;
 
-@WebServlet("/pois")
 public class PoiServlet extends HttpServlet {
 
    private static final long serialVersionUID = 4581952804038449353L;
