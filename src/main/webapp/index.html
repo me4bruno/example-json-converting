@@ -37,7 +37,8 @@
     // Layer: POIs
     var poiStyle = {externalGraphic: '${image}', graphicHeight: 37, graphicWidth: 32, graphicYOffset: -34};
     var poisLayer = new OpenLayers.Layer.Vector("POIs", {
-        projection: PROJECTION_4326,
+        attribution: "<br>Icons CC-BY-SA 3.0 by <a href='http://mapicons.nicolasmollet.com'>Map Icons Collection<a/>",
+    	projection: PROJECTION_4326,
         protocol: new OpenLayers.Protocol.HTTP({
                 url: "pois",
                 format: new OpenLayers.Format.GeoJSON()
@@ -47,7 +48,6 @@
     })
     map.addLayer(poisLayer);
   }
-	  
 </script>
 
 <style type="text/css">
@@ -61,5 +61,10 @@ html,body,#map {
 </head>
 <body onload="init()">
   <div id="map"></div>
+  
+  <div id="copyright">
+    	<a target="_blank" href="http://www.openstreetmap.org/">Karte hergestellt aus OpenStreetMap-Daten</a> | Lizenz: <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/de">Creative Commons BY-SA 2.0</a><br>
+    	<a target="_blank" href="http://de.wikipedia.org/wiki/Liste_der_Kernreaktoren_in_Deutschland#Kernkraftwerke">AKW-Daten entnommen von Wikipedia</a> | Lizenz: <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-sa/3.0/de/">Creative Commons BY-SA 3.0</a>
+  </div>
 </body>
 </html>
